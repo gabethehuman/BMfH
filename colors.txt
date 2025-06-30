@@ -1,0 +1,52 @@
+magma (6 colors): 
+inferno (6 colors): 
+plasma (6 colors): 
+viridis (6 colors): 
+
+
+magma
+['#000004', '#3b0f70', '#8c2981', '#de4968', '#fe9f6d', '#fcfdbf']
+['#000004', '#221150', '#5f187f', '#982d80', '#d3436e', '#f8765c', '#febb81', '#fcfdbf']
+['#000004', '#180f3d', '#440f76', '#721f81', '#9e2f7f', '#cd4071', '#f1605d', '#fd9668', '#feca8d', '#fcfdbf']
+['#000004', '#120d31', '#331067', '#59157e', '#7e2482', '#a3307e', '#c83e73', '#e95462', '#fa7d5e', '#fea973', '#fed395', '#fcfdbf']
+
+inferno
+['#000004', '#420a68', '#932667', '#dd513a', '#fca50a', '#fcffa4']
+['#000004', '#280b53', '#65156e', '#9f2a63', '#d44842', '#f57d15', '#fac228', '#fcffa4']
+['#000004', '#1b0c41', '#4a0c6b', '#781c6d', '#a52c60', '#cf4446', '#ed6925', '#fb9b06', '#f7d13d', '#fcffa4']
+['#000004', '#140b34', '#390963', '#5f136e', '#85216b', '#a92e5e', '#cb4149', '#e65d2f', '#f78410', '#fcae12', '#f5db4c', '#fcffa4']
+
+plasma
+['#0d0887', '#6a00a8', '#b12a90', '#e16462', '#fca636', '#f0f921']
+['#0d0887', '#5302a3', '#8b0aa5', '#b83289', '#db5c68', '#f48849', '#febd2a', '#f0f921']
+['#0d0887', '#46039f', '#7201a8', '#9c179e', '#bd3786', '#d8576b', '#ed7953', '#fb9f3a', '#fdca26', '#f0f921']
+['#0d0887', '#3e049c', '#6300a7', '#8606a6', '#a62098', '#c03a83', '#d5546e', '#e76f5a', '#f68d45', '#fdae32', '#fcd225', '#f0f921']
+
+viridis
+['#440154', '#414487', '#2a788e', '#22a884', '#7ad151', '#fde725']
+['#440154', '#46327e', '#365c8d', '#277f8e', '#1fa187', '#4ac16d', '#a0da39', '#fde725']
+['#440154', '#482878', '#3e4989', '#31688e', '#26828e', '#1f9e89', '#35b779', '#6ece58', '#b5de2b', '#fde725']
+['#440154', '#482173', '#433e85', '#38588c', '#2d708e', '#25858e', '#1e9b8a', '#2ab07f', '#52c569', '#86d549', '#c2df23', '#fde725']
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib import colors
+
+viridis_names = ["magma", "inferno", "plasma", "viridis"]
+n = 8  # Number of colors in each palette
+
+fig, axes = plt.subplots(2, 2, figsize=(8, 4))
+axes = axes.flatten()
+
+for i, name in enumerate(viridis_names):
+    cmap = plt.get_cmap(name, n)  # Get colormap with n discrete colors
+    gradient = np.linspace(0, 1, n).reshape(1, n)
+    axes[i].imshow(gradient, aspect="auto", cmap=cmap)
+    axes[i].axis("off")
+    axes[i].set_title(name, fontsize=10, pad=5)
+    hex_colors = [colors.to_hex(cmap(j)) for j in range(cmap.N)]
+    print(f"{name} ({n} colors): {hex_colors}")
+
+plt.tight_layout()
+plt.show()
